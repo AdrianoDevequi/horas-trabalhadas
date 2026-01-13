@@ -38,6 +38,15 @@ window.electronAPI.onUpdateTime((data) => {
             statusDot.classList.add('paused-chrome');
         }
     }
+
+    // Update version if needed
+    if (data.version) {
+        const vEl = document.getElementById('app-version');
+        if (vEl && vEl.textContent === '...') {
+            vEl.textContent = data.version;
+        }
+        document.title = `Time Tracker v${data.version}`;
+    }
 });
 
 // History Logic

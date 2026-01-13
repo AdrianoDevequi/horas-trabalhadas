@@ -1,12 +1,13 @@
 {
   "name": "time-tracker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple time tracker for Windows",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "clean": "rmdir /s /q dist"
   },
   "keywords": [],
   "author": "",
