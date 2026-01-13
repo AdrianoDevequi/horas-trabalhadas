@@ -1,0 +1,33 @@
+{
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "description": "Simple time tracker for Windows",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.timetracker.app",
+    "productName": "Time Tracker Premium",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/icon.png"
+    },
+    "asarUnpack": [
+      "**/*.ps1"
+    ]
+  }
+}
