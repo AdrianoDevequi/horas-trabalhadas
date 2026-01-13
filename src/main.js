@@ -256,7 +256,7 @@ async function checkActivity() {
             trackingData.sessions = [];
             trackingData.currentDate = todayStr;
             trackingData.notificationsSent = { h6: false, h8: false, h10: false };
-            
+
             // If we were tracking, restart the "current session" for the new day
             if (trackingData.isTracking) {
                 trackingData.currentSessionStart = Date.now();
@@ -444,6 +444,25 @@ if (!gotTheLock) {
         });
     });
 }
+
+// Ensure we save data before quitting
+app.on('will-quit', () => {
+    log('App is quitting, saving data...');
+    if (trackingData.isTracking && trackingData.currentSessionStart) {
+        const nowTimestamp = Date.now();
+        const duration = Math.floor((nowTimestamp - trackingData.currentSessionStart) / 1000);
+
+        if (duration > 0) {
+            trackingData.sessions.push({
+                start: new Date(trackingData.currentSessionStart).toISOString(),
+                end: new Date(nowTimestamp).toISOString(),
+                duration: duration
+            });
+            log(`Saved final session on quit. Duration: ${duration}s`);
+        }
+    }
+    saveData();
+});
 
 app.on('window-all-closed', () => {
     // Keep running
